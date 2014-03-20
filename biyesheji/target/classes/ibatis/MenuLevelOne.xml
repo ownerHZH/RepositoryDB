@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	
+	<select id="getMenuLevelOne" parameterClass="java.util.Map" resultClass="com.cqjt.pojo.MenuLevelOne">
+		SELECT *
+       FROM [RepositoryDB].[dbo].[menulevelone]
+        where role_code=#menuLevelOne.role_code#
+	</select>
+    
+    <insert id="addMenuLevelOne" parameterClass="com.cqjt.pojo.MenuLevelOne">
+		insert into menulevelone(role_code,menu_level_one_name,mapping_page) 
+		   values(#role_code#,#menu_level_one_name#,#mapping_page#)
+	</insert>
+	<update id="updateMenuLevelOne" parameterClass="com.cqjt.pojo.MenuLevelOne">
+		update menulevelone set 
+		   role_code=#role_code#,
+		   menu_level_one_name=#menu_level_one_name#,
+		   mapping_page=#mapping_page#
+		 where 
+		   menu_level_one_id=#menu_level_one_id#
+	</update>
+</sqlMap>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<select id="getMenuLevelThree" parameterClass="java.util.Map" resultClass="com.cqjt.pojo.MenuLevelThree">
+		select * from [RepositoryDB].[dbo].[menulevelthree] where menu_level_two_id=#menuLevelThree.menu_level_two_id#
+	</select>
+<!-- 	<select id="getMenuLevelThree" parameterType="MenuLevelThree" resultMap="menuLevelThreeMap">
+		select 
+		   menu_level_two_id,
+		   menu_level_three_id,
+		   menu_level_three_name,
+		   mapping_page
+		 from menulevelthree 
+		 where 
+		   menu_level_two_id=#{menu_level_two_id}
+	</select>
+	<insert id="addMenuLevelThree" parameterType="MenuLevelThree">
+		insert into menulevelthree(menu_level_two_id,menu_level_three_name,mapping_page) 
+		   values(#{menu_level_two_id},#{menu_level_three_name},#{mapping_page})
+	</insert>
+	<update id="updateMenuLevelThree" parameterType="MenuLevelThree">
+		update menulevelthree set 
+		   menu_level_two_id=#{menu_level_two_id},
+		   menu_level_three_name=#{menu_level_three_name},
+		   mapping_page=#{mapping_page} 
+		 where 
+		   menu_level_three_id=#{menu_level_three_id}
+	</update> -->
+</sqlMap>

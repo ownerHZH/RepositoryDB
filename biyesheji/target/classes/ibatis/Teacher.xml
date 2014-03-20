@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+<!-- 	<resultMap type="Teacher" id="teacherMap">
+		<id property="user_name" column="user_name"></id>
+		<id property="teacher_code" column="teacher_code"></id>
+		<id property="role_code" column="role_code"></id>
+		<id property="user_password" column="user_password"></id>
+		<id property="teacher_name" column="teacher_name"></id>
+		<id property="teacher_sex" column="teacher_sex"></id>
+		<id property="teacher_birthday" column="teacher_birthday"></id>
+		<id property="teacher_academic" column="teacher_academic"></id>
+		<id property="teacher_degree" column="teacher_degree"></id>
+		<id property="teacher_title" column="teacher_title"></id>
+		<id property="teacher_character" column="teacher_character"></id>
+	</resultMap> -->
+<!-- 	<select id="getTeacherByCode" parameterType="Teacher" resultMap="teacherMap">
+		select 
+		    user_name,
+			teacher_code,
+			role_code,
+			user_password,
+			teacher_name,
+			teacher_sex,
+			teacher_birthday,
+			teacher_academic,
+			teacher_degree,
+			teacher_title,
+			teacher_character
+ 
+		 from teacher 
+		   where teacher_code=#{teacher_code}
+	</select>
+	
+	<select id="getAllTeacher" parameterType="Teacher" resultMap="teacherMap">
+		select 
+		    user_name,
+			teacher_code,
+			role_code,
+			user_password,
+			teacher_name,
+			teacher_sex,
+			teacher_birthday,
+			teacher_academic,
+			teacher_degree,
+			teacher_title,
+			teacher_character 
+		 from teacher 
+	</select>
+	
+	<insert id="addTeacher" parameterType="Teacher">
+		insert into teacher(
+		        user_name,
+				teacher_code,
+				role_code,
+				user_password,
+				teacher_name,
+				teacher_sex,
+				teacher_birthday,
+				teacher_academic,
+				teacher_degree,
+				teacher_title,
+				teacher_character
+		       ) 
+		   values(
+		           #{user_name},
+		           #{teacher_code},
+		           #{role_code},
+		           #{user_password},
+		           #{teacher_name},
+		           #{teacher_sex},
+		           #{teacher_birthday},
+		           #{teacher_academic},
+		           #{teacher_degree},
+		           #{teacher_title},
+		           #{teacher_character})
+	</insert>
+	
+	<insert id="addTeacherBatch" parameterType="Teacher">  
+        insert into teacher(
+		        user_name,
+				teacher_code,
+				role_code,
+				user_password,
+				teacher_name,
+				teacher_sex,
+				teacher_birthday,
+				teacher_academic,
+				teacher_degree,
+				teacher_title,
+				teacher_character
+		       ) 
+		   values
+          <foreach collection="teachers" item="item" index="index" separator=",">
+               (
+		           #{item.user_name,jdbcType=VARCHAR},
+		           #{item.teacher_code,jdbcType=VARCHAR},
+		           #{item.role_code,jdbcType=INTEGER},
+		           #{item.user_password,jdbcType=VARCHAR},
+		           #{item.teacher_name,jdbcType=VARCHAR},
+		           #{item.teacher_sex,jdbcType=VARCHAR},
+		           #{item.teacher_birthday,jdbcType=TIMESTAMP},
+		           #{item.teacher_academic,jdbcType=VARCHAR},
+		           #{item.teacher_degree,jdbcType=VARCHAR},
+		           #{item.teacher_title,jdbcType=VARCHAR},
+		           #{item.teacher_character,jdbcType=INTEGER})
+          </foreach> 
+    </insert>
+	
+	<update id="updateTeacher" parameterType="Teacher">
+		update teacher set 
+		   user_name=#{user_name},
+		   teacher_code=#{teacher_code},
+		   role_code=#{role_code},
+		   user_password=#{user_password},
+		   teacher_name=#{teacher_name},
+		   teacher_sex=#{teacher_sex},
+		   teacher_birthday=#{teacher_birthday},
+		   teacher_academic=#{teacher_academic},
+		   teacher_degree=#{teacher_degree},
+		   teacher_title=#{teacher_title},
+		   teacher_character=#{teacher_character}
+		 where 
+		   teacher_code=#{teacher_code}
+	</update> -->
+	
+</sqlMap>

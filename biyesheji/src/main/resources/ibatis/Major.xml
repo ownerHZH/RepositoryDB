@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>	
+	<!-- 查询所有专业 -->
+ 	<select id="getallmajor" resultClass="com.cqjt.pojo.Major">
+		select 
+		   * 
+		 from major
+	</select>
+	
+	<select id="getMajorById" parameterClass="java.util.Map" resultClass="com.cqjt.pojo.Major">
+		select 
+		   *
+        from major where major_code=#major_code#
+	</select>
+	
+	<insert id="addMajor" parameterClass="com.cqjt.pojo.Major">
+		insert into major(
+		   major_code,
+		   major_name,
+		   core_curriculum, 
+		   occupational_direction,
+		   goal,
+		   history) 
+			   values(
+			   #major_code#,
+			   #major_name#,
+			   #core_curriculum#,
+			   #occupational_direction#,
+			   #goal#,
+			   #history#
+			   )
+	</insert>
+	
+	<update id="updateMajor" parameterClass="com.cqjt.pojo.Major">
+		update major set 
+		   major_name=#major_name#,
+		   core_curriculum=#core_curriculum#,
+		   occupational_direction=#occupational_direction#,
+		   goal=#goal#,
+		   history=#history#
+		 where 
+		   major_code=#major_code#
+	</update>
+	
+</sqlMap>

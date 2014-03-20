@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" 
+"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>	
+	<!-- 别名 -->
+<!-- 	<typeAliases>
+		<typeAlias type="com.owner.entity.MenuLevelOne" alias="MenuLevelOne"/>
+		<typeAlias type="com.owner.entity.MenuLevelTwo" alias="MenuLevelTwo"/>
+		<typeAlias type="com.owner.entity.MenuLevelThree" alias="MenuLevelThree"/>
+		
+		<typeAlias type="com.owner.entity.Role" alias="Role"/>
+		<typeAlias type="com.owner.entity.Major" alias="Major"/>
+		<typeAlias type="com.owner.entity.Teacher" alias="Teacher"/>
+	</typeAliases> -->
+	 <settings cacheModelsEnabled="true" enhancementEnabled="false" lazyLoadingEnabled="false" maxRequests="3000" maxSessions="3000"
+		maxTransactions="3000" useStatementNamespaces="false"  />
+      <sqlMap resource="ibatis/MenuLevelOne.xml" />
+       <sqlMap resource="ibatis/MenuLevelTwo.xml" />
+      <sqlMap resource="ibatis/MenuLevelThree.xml" />
+      <sqlMap resource="ibatis/Role.xml" />
+      <sqlMap resource="ibatis/Major.xml" />
+      <sqlMap resource="ibatis/Teacher.xml" />
+</sqlMapConfig>	

@@ -1,0 +1,12 @@
+cd /home/code/yapaihd;
+svn up /home/code/yapaihd;
+./mvne.sh;
+./mvni.sh;
+cd /home/code/yapaihd/target;
+rm -rf /usr/local/tomcat/webapps/app*;
+rm -rf /usr/local/tomcat/webapps/ROOT;
+rm -rf /usr/local/tomcat/work/*;
+mv app-1.0.0-BUILD-SNAPSHOT.war /usr/local/tomcat/webapps/app.war;
+cd /usr/local/tomcat/bin;
+./shutdown.sh;
+./startup.sh;
