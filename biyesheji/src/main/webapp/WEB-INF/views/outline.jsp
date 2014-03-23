@@ -3,22 +3,6 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-
-/* PageOfficeCtrl poCtrl=new PageOfficeCtrl(request);
-//设置服务器页面
-poCtrl.setServerPage(request.getContextPath()+"/poserver.zz");
-poCtrl.setTitlebar(false); //隐藏标题栏
-poCtrl.setMenubar(false); //隐藏菜单栏
-poCtrl.setOfficeToolbars(false);//隐藏Office工具条
-//poCtrl.setCustomToolbar(false);//隐藏自定义工具栏
-//添加自定义按钮
-//poCtrl.addCustomToolButton("保存","Save",1);
-poCtrl.addCustomToolButton("全屏", "SetFullScreen()", 4);
-//设置保存页面
-poCtrl.setSaveFilePage("SaveFile");
-//打开Word文档
-poCtrl.webOpen("resources/doc/test.doc",OpenModeType.docReadOnly,"owner");
-poCtrl.setTagId("PageOfficeCtrl1");//此行必需 */
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -36,11 +20,7 @@ poCtrl.setTagId("PageOfficeCtrl1");//此行必需 */
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
-  </head>
-  
-<body>
-    <script type="text/javascript">
+     <script type="text/javascript">
         
         function SetFullScreen() {
             document.getElementById("PageOfficeCtrl1").FullScreen = !document.getElementById("PageOfficeCtrl1").FullScreen;
@@ -57,11 +37,28 @@ poCtrl.setTagId("PageOfficeCtrl1");//此行必需 */
         }
         
     </script>
-    <form id="form1" >
-    <div style=" width:auto; height:700px;">
+    <style type="text/css">
+       .courselist{width: 20%;height: 100%;float: left;text-align: center; margin: 0 auto;}
+       .courselist ul{list-style: none;text-align: center;}
+       .courselist ul li{cursor: pointer; margin: 10px;}
+       .courselist ul li:HOVER{color: blue;}
+       .pageoffice{width: 80%;height: 700px;float: right;}
+    </style>
+  </head>
+  
+<body>
+    <div id="courselist" class="courselist">
+       <ul>
+         <li>java语言基础</li>
+         <li>C++语言基础</li>
+         <li>C#语言基础</li>
+         <li>数据库基础</li>
+       </ul>
+    </div>
+    
+    <div class="pageoffice">
         <po:PageOfficeCtrl id="PageOfficeCtrl1">
         </po:PageOfficeCtrl>
     </div>
-    </form>
 </body>
 </html>

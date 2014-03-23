@@ -8,6 +8,9 @@ import javax.jws.WebService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Service;
+
+import com.cqjt.pojo.CurriculumOutline;
 import com.cqjt.pojo.MenuLevelOne;
 import com.cqjt.pojo.MenuLevelThree;
 import com.cqjt.pojo.MenuLevelTwo;
@@ -17,9 +20,14 @@ import com.zhuozhengsoft.pageoffice.FileSaver;
 import com.zhuozhengsoft.pageoffice.OpenModeType;
 import com.zhuozhengsoft.pageoffice.PageOfficeCtrl;
 
+/**
+ * 大纲服务层
+ * @author Owner
+ *
+ */
 
-//@Service(value="menuService")
-@WebService(endpointInterface = "com.cqjt.service.IOutLineService", serviceName = "outLineService")
+@Service(value="outLineService")
+//@WebService(endpointInterface = "com.cqjt.service.IOutLineService", serviceName = "outLineService")
 public class OutLineServiceImpl extends BaseServiceImpl implements IOutLineService {
 	
 	@Override
@@ -48,6 +56,46 @@ public class OutLineServiceImpl extends BaseServiceImpl implements IOutLineServi
 		fs.saveToFile(request.getSession().getServletContext()
 				.getRealPath(docPath)+"/"+fs.getFileName());//"resources/doc/"
 		fs.close();
+	}
+
+
+	@Override
+	public List<CurriculumOutline> getAllOutline() {
+		@SuppressWarnings("unchecked")
+		List<CurriculumOutline> coList=(List<CurriculumOutline>) super.select("getAllOutline", null);
+		return coList;
+	}
+
+
+	@Override
+	public CurriculumOutline getOutlineByCode(int code) {
+		HashMap<String, Object> params=new HashMap<String, Object>();
+		params.put("curriculum_code", code);
+		CurriculumOutline c=(CurriculumOutline) super.find("getOutlineByCode", params);
+		return c;
+	}
+
+
+	@Override
+	public boolean addOutline(CurriculumOutline curriculumOutline) {
+		Object o=super.insert("addOutline", curriculumOutline);
+		return o==null?false:true;
+	}
+
+
+	@Override
+	public boolean updateOutline(CurriculumOutline curriculumOutline) {
+		Object o=super.update("updateOutline", curriculumOutline);
+		return o==null?false:true;
+	}
+
+
+	@Override
+	public boolean deleteOutline(CurriculumOutline curriculumOutline) {
+		HashMap<String, Object> params=new HashMap<String, Object>();
+		params.put("curriculum_code", curriculumOutline.getCurriculum_code());
+		Object o=super.delete("deleteOutline", params);
+		return o==null?false:true;
 	}
 
 }

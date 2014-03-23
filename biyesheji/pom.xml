@@ -47,6 +47,12 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 				
 		<!-- AspectJ -->
 		<dependency>
@@ -131,14 +137,12 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-	
-<!-- 		
+			
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
-			<scope>test</scope>
-		</dependency>       -->  
+			<version>4.8.2</version>
+		</dependency>     
 		
 		<!-- ibatis -->
 		<dependency>
@@ -217,6 +221,17 @@
             	<artifactId>webapp-javaee6</artifactId>
             	<version>1.5</version>
             </plugin>
+            
+            <plugin>
+				<groupId>org.apache.maven.surefire</groupId>
+				<artifactId>surefire-junit4</artifactId>
+				<version>2.4.3</version>
+				<configuration>
+					<skip>false</skip>
+					<testFailureIgnore>true</testFailureIgnore>
+				</configuration>
+            </plugin>
+            
         </plugins>
     </build>
 </project>

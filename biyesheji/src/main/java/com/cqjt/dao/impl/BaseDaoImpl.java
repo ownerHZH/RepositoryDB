@@ -1,12 +1,15 @@
 package com.cqjt.dao.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.orm.ibatis.SqlMapClientCallback;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.cqjt.dao.BaseDao;
+import com.ibatis.sqlmap.client.SqlMapExecutor;
 
 
 public class BaseDaoImpl extends SqlMapClientDaoSupport implements BaseDao {
@@ -140,5 +143,85 @@ public class BaseDaoImpl extends SqlMapClientDaoSupport implements BaseDao {
 	@Override
 	public int getCount(String sqlName, Object params)  throws DataAccessException {
 		return (Integer)getSqlMapClientTemplate().queryForObject(sqlName, params);
+	}
+
+	/**
+	 * 批量添加
+	 * @author Owner
+	 * @param sqlName xml插入语句id
+	 * @param varList 你要插入的列表
+	 * @throws DataAccessException
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void insert(final String sqlName, final List varList) throws DataAccessException {
+		this.getSqlMapClientTemplate().execute(new SqlMapClientCallback() { 
+            public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException { 
+                executor.startBatch(); 
+                for (int i = 0; i < varList.size(); i++) { 
+                    executor.insert(sqlName, varList.get(i)); 
+                } 
+                executor.executeBatch(); 
+                return null; 
+            } 
+        });
+	}
+
+	/**
+	 * 批量删除
+	 * @author Owner
+	 * @param sqlName 删除的xml语句id
+	 * @param list 你要传入要删除的list
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void delete(final String sqlName, final List list) {
+		try {
+			if (list != null) {
+				this.getSqlMapClientTemplate().execute(
+						new SqlMapClientCallback() {
+							public Object doInSqlMapClient(
+									SqlMapExecutor executor)
+									throws SQLException {
+								executor.startBatch();
+								for (int i = 0, n = list.size(); i < n; i++) {
+									executor.delete(sqlName, list.get(i));
+								}
+								executor.executeBatch();
+								return null;
+							}
+						});
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 批量更新
+	 * @author Owner
+	 * @param sqlName
+	 * @param list
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void update(final String sqlName, final List list) {
+		 try {
+	           if (list != null ) {
+	              this .getSqlMapClientTemplate().execute( new SqlMapClientCallback() {
+	                  public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
+	                     executor.startBatch();
+	                     for ( int i = 0, n = list.size(); i < n; i++) {
+	                         executor.update(sqlName, list.get(i));
+	                     }
+	                     executor.executeBatch();
+	                     return null ;
+	                  }
+	              });
+	           }
+	       } catch (Exception e) {
+	              e.printStackTrace();
+	       }
 	}
 }

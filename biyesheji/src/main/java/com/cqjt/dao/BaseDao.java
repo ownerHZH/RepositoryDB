@@ -16,6 +16,14 @@ public interface BaseDao {
 	public Object insert(String sqlName, Object entity) throws DataAccessException;
 
 	/**
+	 * 批量添加
+	 * @author Owner
+	 * @param sqlName xml插入语句id
+	 * @param varList 你要插入的列表
+	 * @throws DataAccessException
+	 */
+	public void insert(String sqlName, List varList)throws DataAccessException;
+	/**
 	 * 查询
 	 * 
 	 * @param selectName
@@ -35,6 +43,13 @@ public interface BaseDao {
 	public boolean update(String sqlName, Object entity);
 
 	/**
+	 * 批量更新
+	 * @author Owner
+	 * @param sqlName
+	 * @param list
+	 */
+	public void update(final String sqlName, final List list);
+	/**
 	 * 删除
 	 * 
 	 * @param delete
@@ -42,6 +57,14 @@ public interface BaseDao {
 	 * @return
 	 */
 	public Integer delete(String sqlName, Map<String, Object> params);
+	
+	/**
+	 * 批量删除
+	 * @author Owner
+	 * @param sqlName 删除的xml语句id
+	 * @param list 你要传入要删除的list
+	 */
+	public void delete(String sqlName,List list);
 
 	/**
 	 * 查询单个数据

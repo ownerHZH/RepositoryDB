@@ -113,5 +113,38 @@ public class BaseServiceImpl implements BaseService {
 	public int getCount(String sqlName, Object params) {
 		return baseDao.getCount(sqlName, params);
 	}
+
+	/**
+	 * 批量插入数据
+	 * @author Owner
+	 * @param sqlName
+	 * @param list
+	 */
+	@Override
+	public void insert(String sqlName, List<?> list) {
+		baseDao.insert(sqlName, list);		
+	}
+
+	/**
+	 * 批量删除数据
+	 * @author Owner
+	 * @param sqlName
+	 * @param list
+	 */
+	@Override
+	public void delete(String sqlName, List<?> list) {
+		baseDao.delete(sqlName, list);
+	}
+
+	/**
+	 * 批量更新
+	 * @author Owner
+	 * @param sqlName
+	 * @param list
+	 */
+	@Override
+	public void update(String sqlName, List<?> list) {
+		baseDao.update(sqlName, list);
+	}
 	
 }

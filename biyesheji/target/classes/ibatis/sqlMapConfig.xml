@@ -20,4 +20,6 @@
       <sqlMap resource="ibatis/Role.xml" />
       <sqlMap resource="ibatis/Major.xml" />
       <sqlMap resource="ibatis/Teacher.xml" />
+      
+      <sqlMap resource="ibatis/CurriculumOutline.xml" />
 </sqlMapConfig>	

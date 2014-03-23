@@ -11,6 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cqjt.service.IOutLineService;
 
+/**
+ * 大纲控制层
+ * @author Owner
+ *
+ */
 
 @Controller
 @RequestMapping(value = "/")

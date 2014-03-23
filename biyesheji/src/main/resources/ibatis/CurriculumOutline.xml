@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>	
+	<!-- 查询所有大纲 -->
+ 	<select id="getAllOutline" resultClass="com.cqjt.pojo.CurriculumOutline">
+		SELECT [curriculum_code]
+		      ,[co_name]
+		      ,[filename]
+		      ,[location]
+        FROM [RepositoryDB].[dbo].[curriculum_outline]
+	</select>
+	
+	<select id="getOutlineByCode" parameterClass="java.util.Map" resultClass="com.cqjt.pojo.CurriculumOutline">
+		SELECT [curriculum_code]
+		      ,[co_name]
+		      ,[filename]
+		      ,[location]
+        FROM [RepositoryDB].[dbo].[curriculum_outline]
+        WHERE curriculum_code=#curriculum_code#
+	</select>
+	
+	<insert id="addOutline" parameterClass="com.cqjt.pojo.CurriculumOutline">
+		INSERT INTO curriculum_outline(
+	       [curriculum_code]
+	      ,[co_name]
+	      ,[filename]
+	      ,[location]) 
+        VALUES (
+           #curriculum_code#
+          ,#co_name#
+	      ,#filename#
+	      ,#location#       
+        )
+	</insert>
+	
+	<update id="updateOutline" parameterClass="com.cqjt.pojo.CurriculumOutline" >
+		UPDATE curriculum_outline SET 
+		   curriculum_code=#curriculum_code#
+          ,co_name=#co_name#
+	      ,filename=#filename#
+	      ,location=#location# 
+		 WHERE 
+		   curriculum_code=#curriculum_code#
+	</update>
+	
+	<delete id="deleteOutline" parameterClass="java.util.Map">
+	    DELETE FROM curriculum_outline
+        WHERE curriculum_code=#curriculum_code#
+	</delete>
+</sqlMap>

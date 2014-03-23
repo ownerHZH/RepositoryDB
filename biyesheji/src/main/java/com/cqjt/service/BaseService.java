@@ -72,4 +72,28 @@ public interface BaseService {
 	 * @return
 	 */
 	public int getCount(String sqlName, Object params);
+	
+	/**
+	 * 批量插入数据
+	 * @author Owner
+	 * @param sqlName
+	 * @param list
+	 */
+	public void insert(String sqlName, List<?> list);
+	
+	/**
+	 * 批量删除数据
+	 * @author Owner
+	 * @param sqlName
+	 * @param list
+	 */
+	public void delete(String sqlName, List<?> list);
+	
+	/**
+	 * 批量更新
+	 * @author Owner
+	 * @param sqlName
+	 * @param list
+	 */
+	public void update(String sqlName, List<?> list);
 }
