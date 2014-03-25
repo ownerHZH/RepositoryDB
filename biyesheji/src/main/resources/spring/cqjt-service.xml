@@ -10,4 +10,5 @@
 	<bean id="menuService" class="com.cqjt.service.impl.MenuServiceImpl"></bean>
 	<bean id="teacherService" class="com.cqjt.service.impl.TeacherServiceImpl"></bean>
 	<bean id="outLineService" class="com.cqjt.service.impl.OutLineServiceImpl"></bean>
+	<bean id="curriculumService" class="com.cqjt.service.impl.CurriculumServiceImpl"></bean>
 </beans>

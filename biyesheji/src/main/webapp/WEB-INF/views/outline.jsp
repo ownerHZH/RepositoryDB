@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*,com.zhuozhengsoft.pageoffice.*;" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.pageoffice.cn" prefix="po"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -36,6 +37,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             !document.getElementById("PageOfficeCtrl1").Document.ActiveWindow.ActivePane.DisplayRulers;
         }
         
+        function menuclick()
+        {
+           alert('string');
+        }
+        
     </script>
     <style type="text/css">
        .courselist{width: 20%;height: 100%;float: left;text-align: center; margin: 0 auto;}
@@ -49,10 +55,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
     <div id="courselist" class="courselist">
        <ul>
-         <li>java语言基础</li>
-         <li>C++语言基础</li>
-         <li>C#语言基础</li>
-         <li>数据库基础</li>
+	       <c:forEach items="${curriculums}" var="curriculum">
+	          <li onclick="menuclick()">${curriculum.curriculum_name}</li>
+	       </c:forEach>
        </ul>
     </div>
     
