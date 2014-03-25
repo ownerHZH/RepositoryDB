@@ -39,6 +39,13 @@ public class OutLineController {
 		return new ModelAndView("outline","curriculums",curriculums);
 	}
 	
+	@RequestMapping(value ="/openOffice", method = RequestMethod.GET)
+	public ModelAndView openOffice(HttpServletRequest request) {
+		String docFile="resources/doc/test.doc";
+		outLineService.openPageOffice(request, docFile);
+		return null;
+	}
+	
 	@RequestMapping(value ="/SaveFile",method = RequestMethod.POST)
 	public ModelAndView SaveFile(HttpServletResponse response,HttpServletRequest request) {
 		String docPath="resources/doc/";

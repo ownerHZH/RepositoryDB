@@ -21,6 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	<script type="text/javascript" src="<c:url value='resources/js/jquery.js'/>"></script>
      <script type="text/javascript">
         
         function SetFullScreen() {
@@ -49,6 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        .courselist ul li{cursor: pointer; margin: 10px;}
        .courselist ul li:HOVER{color: blue;}
        .pageoffice{width: 80%;height: 700px;float: right;}
+       .container{width: 80%;height: 100%;float: right; background-color: #cac;}
     </style>
   </head>
   
@@ -61,9 +63,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        </ul>
     </div>
     
-    <div class="pageoffice">
+    <div class="container" id="container">
+    
+    </div>
+    
+   <div class="pageoffice" id="pageoffice">
         <po:PageOfficeCtrl id="PageOfficeCtrl1">
         </po:PageOfficeCtrl>
-    </div>
+   </div>
+   
 </body>
 </html>
