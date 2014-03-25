@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>	
+	<!-- 查询所有课程 -->
+ 	<select id="getAllCurriculum" resultClass="com.cqjt.pojo.Curriculum">
+		SELECT [curriculum_code]
+		      ,[cc_code]
+		      ,[studymode_id]
+		      ,[curriculum_name]
+		      ,[curriculum_englishname]
+		      ,[credit]
+		      ,[all_time]
+		      ,[theory_time]
+		      ,[practice_time]
+		      ,[computer_time]
+		      ,[semester_code]
+		      ,[exam_way]
+		      ,[explain]
+        FROM [RepositoryDB].[dbo].[curriculum]
+	</select>
+	
+	<select id="getCurriculumByCode" parameterClass="java.util.Map" resultClass="com.cqjt.pojo.Curriculum">
+		SELECT [curriculum_code]
+		      ,[cc_code]
+		      ,[studymode_id]
+		      ,[curriculum_name]
+		      ,[curriculum_englishname]
+		      ,[credit]
+		      ,[all_time]
+		      ,[theory_time]
+		      ,[practice_time]
+		      ,[computer_time]
+		      ,[semester_code]
+		      ,[exam_way]
+		      ,[explain]
+        FROM [RepositoryDB].[dbo].[curriculum]
+        WHERE curriculum_code=#curriculum_code#
+	</select>
+	
+	<insert id="addCurriculum" parameterClass="com.cqjt.pojo.Curriculum">
+		INSERT INTO curriculum(
+	           curriculum_code
+		      ,cc_code
+		      ,studymode_id
+		      ,curriculum_name
+		      ,curriculum_englishname
+		      ,credit
+		      ,all_time
+		      ,theory_time
+		      ,practice_time
+		      ,computer_time
+		      ,semester_code
+		      ,exam_way
+		      ,explain) 
+        VALUES (
+               #curriculum_code#
+		      ,#cc_code#
+		      ,#studymode_id#
+		      ,#curriculum_name#
+		      ,#curriculum_englishname#
+		      ,#credit#
+		      ,#all_time#
+		      ,#theory_time#
+		      ,#practice_time#
+		      ,#computer_time#
+		      ,#semester_code#
+		      ,#exam_way#
+		      ,#explain#       
+        )
+	</insert>
+	
+	<update id="updateCurriculum" parameterClass="com.cqjt.pojo.Curriculum" >
+		UPDATE curriculum SET 
+		       curriculum_code=#curriculum_code#
+		      ,cc_code=#cc_code#
+		      ,studymode_id=#studymode_id#
+		      ,curriculum_name=#curriculum_name#
+		      ,curriculum_englishname=#curriculum_englishname#
+		      ,credit=#credit#
+		      ,all_time=#all_time#
+		      ,theory_time=#theory_time#
+		      ,practice_time=#practice_time#
+		      ,computer_time=#computer_time#
+		      ,semester_code=#semester_code#
+		      ,exam_way=#exam_way#
+		      ,explain =#explain#
+		 WHERE 
+		   curriculum_code=#curriculum_code#
+	</update>
+	
+	<delete id="deleteCurriculum" parameterClass="java.util.Map">
+	    DELETE FROM curriculum
+        WHERE curriculum_code=#curriculum_code#
+	</delete>
+</sqlMap>
