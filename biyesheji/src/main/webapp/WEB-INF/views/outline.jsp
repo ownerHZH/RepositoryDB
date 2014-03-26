@@ -1,5 +1,4 @@
-<%@ page language="java" import="java.util.*,com.zhuozhengsoft.pageoffice.*;" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.pageoffice.cn" prefix="po"%>
+<%@ page language="java" import="java.util.* " pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
@@ -22,25 +21,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	<script type="text/javascript" src="<c:url value='resources/js/jquery.js'/>"></script>
-     <script type="text/javascript">
-        
-        function SetFullScreen() {
-            document.getElementById("PageOfficeCtrl1").FullScreen = !document.getElementById("PageOfficeCtrl1").FullScreen;
-        }
-        
-        function Save() {
-            document.getElementById("PageOfficeCtrl1").WebSave();
-        }
-        
-        //显示/隐藏标尺
-        function Hidden() {
-            document.getElementById("PageOfficeCtrl1").Document.ActiveWindow.ActivePane.DisplayRulers = 
-            !document.getElementById("PageOfficeCtrl1").Document.ActiveWindow.ActivePane.DisplayRulers;
-        }
-        
-        function menuclick()
+     <script type="text/javascript">       
+        function menuclick(code)
         {
-           alert('string');
+           $.ajax({
+			   type: "GET",
+			   dataType: "json",//返回json格式的数据
+			   url: "getDataByCode",
+			   data: {
+			            code:code
+			         },
+			   success: function(data){
+			     $("#name").text(data.filename+"("+data.co_name+")");
+			     $("#edit").toggle(function(){
+			               $(this).text("查看");
+					       $("#pageoffice").attr("src","editOffice");},
+					 function(){
+			               $(this).text("编辑");
+			               $("#pageoffice").attr("src","page-office");
+			      });
+			   }
+		   });
         }
         
     </script>
@@ -49,8 +50,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        .courselist ul{list-style: none;text-align: center;}
        .courselist ul li{cursor: pointer; margin: 10px;}
        .courselist ul li:HOVER{color: blue;}
-       .pageoffice{width: 80%;height: 700px;float: right;}
-       .container{width: 80%;height: 100%;float: right; background-color: #cac;}
+       .pageoffice{width: 80%;height: auto;float: right; background-color: #cac;}
+       .pageoffice iframe{width: 100%;height: 100%;margin: 0;padding: 0;border: 0;}
+       .container{width: 80%;height: auto;float: right; background-color: #cac;}
+       #name{ margin-left: 40%;padding-right: 10%;}
+       #edit{text-decoration:underline; cursor: pointer;margin: 30px;}
+       #edit:HOVER{color: blue;}
+       #delete{text-decoration:underline;cursor: pointer;margin: 30px;}
+       #delete:HOVER{color: blue;}
+       #download{text-decoration:underline;cursor: pointer;margin: 30px;}
+       #download:HOVER{color: blue;}
     </style>
   </head>
   
@@ -58,19 +67,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="courselist" class="courselist">
        <ul>
 	       <c:forEach items="${curriculums}" var="curriculum">
-	          <li onclick="menuclick()">${curriculum.curriculum_name}</li>
+	          <li onclick="menuclick(${curriculum.curriculum_code})">${curriculum.curriculum_name}</li>
 	       </c:forEach>
        </ul>
     </div>
     
     <div class="container" id="container">
+       <a id="name"></a><a id="edit">编辑</a><a id="delete">删除</a><a id="download">下载</a>
+    </div> 
     
+    <div class="pageoffice">
+       <iframe id="pageoffice" src="page-office"></iframe>
     </div>
-    
-   <div class="pageoffice" id="pageoffice">
-        <po:PageOfficeCtrl id="PageOfficeCtrl1">
-        </po:PageOfficeCtrl>
-   </div>
    
 </body>
 </html>

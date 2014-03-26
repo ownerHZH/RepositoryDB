@@ -35,5 +35,11 @@ public class CurriculumOutline {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	@Override
+	public String toString() {
+		return "CurriculumOutline [curriculum_code=" + curriculum_code
+				+ ", co_name=" + co_name + ", filename=" + filename
+				+ ", location=" + location + "]";
+	}
 
 }

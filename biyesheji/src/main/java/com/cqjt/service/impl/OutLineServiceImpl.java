@@ -40,7 +40,26 @@ public class OutLineServiceImpl extends BaseServiceImpl implements IOutLineServi
 		poCtrl.setOfficeToolbars(false);//隐藏Office工具条
 		//poCtrl.setCustomToolbar(false);//隐藏自定义工具栏
 		//添加自定义按钮
-		poCtrl.addCustomToolButton("保存","Save",1);
+		//poCtrl.addCustomToolButton("保存","Save",1);
+		poCtrl.addCustomToolButton("全屏", "SetFullScreen()", 4);
+		//设置保存页面
+		//poCtrl.setSaveFilePage("SaveFile");
+		//打开Word文档
+		poCtrl.webOpen(docFile,OpenModeType.docReadOnly,"owner");//"resources/doc/test.doc"
+		poCtrl.setTagId("PageOfficeCtrl1");//此行必需
+	}
+	
+	@Override
+	public void editPageOffice(HttpServletRequest request, String docFile) {
+		PageOfficeCtrl poCtrl=new PageOfficeCtrl(request);
+		//设置服务器页面
+		poCtrl.setServerPage(request.getContextPath()+"/poserver.zz");
+		poCtrl.setTitlebar(false); //隐藏标题栏
+		poCtrl.setMenubar(false); //隐藏菜单栏
+		//poCtrl.setOfficeToolbars(false);//隐藏Office工具条
+		//poCtrl.setCustomToolbar(false);//隐藏自定义工具栏
+		//添加自定义按钮
+		poCtrl.addCustomToolButton("保存","Save()",1);
 		poCtrl.addCustomToolButton("全屏", "SetFullScreen()", 4);
 		//设置保存页面
 		poCtrl.setSaveFilePage("SaveFile");
@@ -97,5 +116,8 @@ public class OutLineServiceImpl extends BaseServiceImpl implements IOutLineServi
 		Object o=super.delete("deleteOutline", params);
 		return o==null?false:true;
 	}
+
+
+	
 
 }

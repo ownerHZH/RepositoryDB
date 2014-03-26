@@ -3,18 +3,18 @@
 <sqlMap>	
 	<!-- 查询所有大纲 -->
  	<select id="getAllOutline" resultClass="com.cqjt.pojo.CurriculumOutline">
-		SELECT [curriculum_code]
-		      ,[co_name]
-		      ,[filename]
-		      ,[location]
+		SELECT curriculum_code
+		      ,co_name
+		      ,filename
+		      ,location
         FROM [RepositoryDB].[dbo].[curriculum_outline]
 	</select>
 	
 	<select id="getOutlineByCode" parameterClass="java.util.Map" resultClass="com.cqjt.pojo.CurriculumOutline">
-		SELECT [curriculum_code]
-		      ,[co_name]
-		      ,[filename]
-		      ,[location]
+		SELECT curriculum_code
+		      ,co_name
+		      ,filename
+		      ,location
         FROM [RepositoryDB].[dbo].[curriculum_outline]
         WHERE curriculum_code=#curriculum_code#
 	</select>

@@ -15,11 +15,18 @@ import com.cqjt.pojo.CurriculumOutline;
  */
 public interface IOutLineService {
 	/**
-	 * 打开PageOffice
+	 * 以只读打开PageOffice
 	 * @param request
 	 * @param docFile 要打开的文档
 	 */
     public void openPageOffice(HttpServletRequest request,String docFile);
+    
+    /**
+	 * 可编辑PageOffice模式
+	 * @param request
+	 * @param docFile 要打开的文档
+	 */
+    public void editPageOffice(HttpServletRequest request,String docFile);
     
     /**
      * 保存文档
