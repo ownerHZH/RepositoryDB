@@ -62,7 +62,7 @@ public class OutLineServiceImpl extends BaseServiceImpl implements IOutLineServi
 		poCtrl.addCustomToolButton("保存","Save()",1);
 		poCtrl.addCustomToolButton("全屏", "SetFullScreen()", 4);
 		//设置保存页面
-		poCtrl.setSaveFilePage("SaveFile");
+		poCtrl.setSaveFilePage("SaveFile?file="+docFile);
 		//打开Word文档
 		poCtrl.webOpen(docFile,OpenModeType.docNormalEdit,"owner");//"resources/doc/test.doc"
 		poCtrl.setTagId("PageOfficeCtrl1");//此行必需

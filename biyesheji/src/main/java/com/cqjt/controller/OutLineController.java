@@ -60,7 +60,7 @@ public class OutLineController {
 	 */
 	@RequestMapping(value ="/getDataByCode", method = RequestMethod.GET)
 	public  ModelAndView getDataByCode(@ModelAttribute("code")int code,HttpServletResponse response) {
-		CurriculumOutline outline =outLineService.getOutlineByCode(code);	
+		CurriculumOutline outline =outLineService.getOutlineByCode(code);
 		PrintWriter out = null;
 		try {
 			out = response.getWriter();		
@@ -80,10 +80,19 @@ public class OutLineController {
 	 * @return
 	 */
 	@RequestMapping(value ="/page-office", method = RequestMethod.GET)
-	public ModelAndView openOffice(HttpServletRequest request) {
-		String docFile="resources/doc/test.doc";
-		outLineService.openPageOffice(request, docFile);
-		return new ModelAndView("page-office");
+	public ModelAndView openOffice(@ModelAttribute("file")String docFile,HttpServletRequest request) {
+		//String docFile="resources/doc/test.doc";
+		if(docFile==null)
+		{
+			return new ModelAndView("outline/noFileFound");
+		}else if(docFile.substring(docFile.lastIndexOf("/")) .equals(null))
+		{			
+			return new ModelAndView("outline/noFileFound");
+		}else
+		{
+			outLineService.openPageOffice(request, docFile);
+			return new ModelAndView("page-office");
+		}	
 	}
 	
 	/**
@@ -92,8 +101,8 @@ public class OutLineController {
 	 * @return
 	 */
 	@RequestMapping(value ="/editOffice", method = RequestMethod.GET)
-	public ModelAndView editOffice(HttpServletRequest request) {
-		String docFile="resources/doc/test.doc";
+	public ModelAndView editOffice(@ModelAttribute("file")String docFile,HttpServletRequest request) {
+		//String docFile="resources/doc/test.doc";
 		outLineService.editPageOffice(request, docFile);
 		return new ModelAndView("page-office");
 	}
@@ -105,32 +114,55 @@ public class OutLineController {
 	 * @return
 	 */
 	@RequestMapping(value ="/SaveFile",method = RequestMethod.POST)
-	public ModelAndView SaveFile(HttpServletResponse response,HttpServletRequest request) {
-		String docPath="resources/doc/";
+	public ModelAndView SaveFile(@ModelAttribute("file")String docFile,HttpServletResponse response,HttpServletRequest request) {
+		String docPath=docFile.substring(0, docFile.lastIndexOf("/")+1);//"resources/doc/";
 		outLineService.saveFile(request, response, docPath);
 		return null;
 	}
 	
-	@RequestMapping(value ="/getCurriculums",method = RequestMethod.GET)
-	public ModelAndView getCurriculums(HttpServletResponse response,HttpServletRequest request) {
-		/*Curriculum curriculum=new Curriculum();
-		curriculum.setAll_time(5);
-		curriculum.setCc_code(2);
-		curriculum.setComputer_time(5);
-		curriculum.setCredit(5.0f);
-		curriculum.setCurriculum_code(124);
-		curriculum.setCurriculum_englishname("java");
-		curriculum.setCurriculum_name("java");
-		curriculum.setExam_way("考试");
-		curriculum.setExplain("解释");
-		curriculum.setPractice_time(5);
-		curriculum.setSemester_code(5);
-		curriculum.setStudymode_id(5);
-		curriculum.setTheory_time(5);
-		//System.out.println("===>>>"+curriculumService.addCurriculum(curriculum)+"");
-		System.out.println("===>>>"+curriculumService.getCurriculumByCode(123).toString()+"");*/
-		
+	/**
+	 * 文件不存在的跳转
+	 * @return
+	 */
+	@RequestMapping(value ="/nofile",method = RequestMethod.GET)
+	public ModelAndView nofile(@ModelAttribute("code")int code) {
+		return new ModelAndView("outline/no-file-found","code",code);
+	}
+			
+	/**
+	 * outline页面初始化iframe显示的一个页面
+	 * @return
+	 */
+	@RequestMapping(value ="/outlineInitial",method = RequestMethod.GET)
+	public ModelAndView outlineInitial() {
+		return new ModelAndView("outline/outline-initial");
+	}
+	
+	/**
+	 * 删除文档
+	 * @return
+	 */
+	@RequestMapping(value ="/deleteDoc",method = RequestMethod.GET)
+	public ModelAndView deleteDoc(@ModelAttribute("code")int code,HttpServletResponse response) {
+		CurriculumOutline curriculumOutline=new CurriculumOutline();
+		curriculumOutline.setCurriculum_code(code);
+		boolean f=outLineService.deleteOutline(curriculumOutline);
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();		
+			out.print(f);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally
+		{
+			out.close();
+		}	
 		return null;
+	}
+	
+	@RequestMapping(value ="/upload",method = RequestMethod.GET)
+	public ModelAndView uploadDoc(@ModelAttribute("code")int code) {
+		return new ModelAndView("outline/upload","code",code);
 	}
 	
 }
