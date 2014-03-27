@@ -38,4 +38,30 @@ public class FileOperation {
         }
 		return targetFile;
 	}
+	
+	public static String saveFileReturnPath(MultipartFile file, String path) {
+		
+		String fileName = file.getOriginalFilename();  
+        
+        String fileExt = fileName.substring(  
+        		fileName.lastIndexOf(".") + 1).toLowerCase();  
+
+        // new file name  
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");  
+        String newFileName = df.format(new Date()) + "_"  
+                + RandomNumber.getRandomNumber() + "." + fileExt;
+        
+        File targetFile = new File(path, newFileName);  
+        if(!targetFile.exists()){  
+            targetFile.mkdirs();  
+        }  
+  
+        //保存  
+        try {  
+            file.transferTo(targetFile);  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }
+		return path+newFileName;
+	}
 }

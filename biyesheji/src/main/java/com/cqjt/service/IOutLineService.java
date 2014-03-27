@@ -1,10 +1,13 @@
 package com.cqjt.service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cqjt.pojo.CurriculumOutline;
 
@@ -66,4 +69,9 @@ public interface IOutLineService {
      * @return true or false
      */
     public boolean deleteOutline(CurriculumOutline curriculumOutline);
+    
+    /**
+     * 保存上传的文件到指定文件夹
+     */
+    public String saveDocToFolder(MultipartFile file, String path);
 }

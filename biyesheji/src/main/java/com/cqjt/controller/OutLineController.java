@@ -1,5 +1,6 @@
 package com.cqjt.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,7 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cqjt.pojo.Curriculum;
@@ -160,9 +163,35 @@ public class OutLineController {
 		return null;
 	}
 	
+	//显示上传页面
 	@RequestMapping(value ="/upload",method = RequestMethod.GET)
 	public ModelAndView uploadDoc(@ModelAttribute("code")int code) {
-		return new ModelAndView("outline/upload","code",code);
+		return new ModelAndView("outline/no-file-found","code",code);
+	}
+	
+	/**
+	 * 接收上传的文件
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping(value ="/uploadDoc",method = RequestMethod.POST)
+	public ModelAndView receiveDoc(@ModelAttribute("code") String code,@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request,HttpServletResponse response) {
+		String basePath = request.getSession().getServletContext().getRealPath("/")+"resources/doc/";
+		String f=outLineService.saveDocToFolder(file, basePath);
+				
+		String[] p=f.split("resources/doc/");
+		String [] pp=p[1].split("/");
+		String path="resources/doc/"+pp[0]+"/";	
+		String name=pp[1];
+		
+		CurriculumOutline c=new CurriculumOutline();
+		c.setCo_name(name);
+		c.setCurriculum_code(Integer.parseInt(code));
+		c.setFilename(name);
+		c.setLocation(path);
+		outLineService.addOutline(c);
+				//初步打算 消息推送 
+		return null;
 	}
 	
 }

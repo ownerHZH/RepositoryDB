@@ -21,10 +21,10 @@
 	
 	<insert id="addOutline" parameterClass="com.cqjt.pojo.CurriculumOutline">
 		INSERT INTO curriculum_outline(
-	       [curriculum_code]
-	      ,[co_name]
-	      ,[filename]
-	      ,[location]) 
+	       curriculum_code
+	      ,co_name
+	      ,filename
+	      ,location) 
         VALUES (
            #curriculum_code#
           ,#co_name#

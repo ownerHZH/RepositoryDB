@@ -1,5 +1,8 @@
 package com.cqjt.service.impl;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cqjt.pojo.CurriculumOutline;
 import com.cqjt.pojo.MenuLevelOne;
@@ -16,6 +20,7 @@ import com.cqjt.pojo.MenuLevelThree;
 import com.cqjt.pojo.MenuLevelTwo;
 import com.cqjt.service.IMenuService;
 import com.cqjt.service.IOutLineService;
+import com.cqjt.util.FileOperation;
 import com.zhuozhengsoft.pageoffice.FileSaver;
 import com.zhuozhengsoft.pageoffice.OpenModeType;
 import com.zhuozhengsoft.pageoffice.PageOfficeCtrl;
@@ -115,6 +120,17 @@ public class OutLineServiceImpl extends BaseServiceImpl implements IOutLineServi
 		params.put("curriculum_code", curriculumOutline.getCurriculum_code());
 		Object o=super.delete("deleteOutline", params);
 		return o==null?false:true;
+	}
+
+	@Override
+	public String saveDocToFolder(MultipartFile file, String path) {
+		//以日期创建文件夹
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");  
+        String ymd = sdf.format(new Date());
+        
+        //保存文件
+        String f = FileOperation.saveFileReturnPath(file, path+ymd+"/");
+        return f;
 	}
 
 

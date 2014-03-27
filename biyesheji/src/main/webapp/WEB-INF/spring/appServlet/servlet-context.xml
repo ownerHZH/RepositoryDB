@@ -29,5 +29,9 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		p:defaultEncoding="UTF-8" p:maxInMemorySize="4096" />
+	
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 </beans>  
